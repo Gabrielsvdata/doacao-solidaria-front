@@ -539,3 +539,5 @@ useEffect(() => {
 **Status**: 🟢 Pronto para Produção  
 **Versão**: 1.0.0
 
+#   d o a c a o - s o l i d a r i a - f r o n t  
+ 
