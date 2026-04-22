@@ -1,0 +1,218 @@
+.card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faf9 100%);
+  border-left: 5px solid var(--color-primary);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  box-shadow: 0 8px 24px rgba(45, 122, 74, 0.12);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    border-radius: 50%;
+    opacity: 0.05;
+    z-index: 0;
+  }
+
+  &:hover {
+    box-shadow: 0 16px 40px rgba(45, 122, 74, 0.18);
+    transform: translateY(-8px);
+    border-left-color: var(--color-secondary);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+  position: relative;
+  z-index: 1;
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.nome {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--color-text-dark);
+  flex: 1;
+  letter-spacing: -0.3px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &--falta {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+    color: #fecaca;
+  }
+
+  &--critico {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+  }
+
+  &--bajo {
+    background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+    color: #92400e;
+  }
+
+  &--medio {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+  }
+
+  &--bom {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+  }
+
+  &--excesso {
+    background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+    color: #5b21b6;
+  }
+}
+
+.mensagem {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  margin: 0 0 var(--space-lg) 0;
+  padding-bottom: var(--space-lg);
+  border-bottom: 2px solid #f0f0f0;
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+
+  strong {
+    color: #667eea;
+    font-weight: 700;
+  }
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  font-size: 0.95rem;
+  padding: 10px;
+  background: rgba(102, 126, 234, 0.03);
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.icon {
+  font-size: 1.2rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.texto {
+  color: var(--color-text-dark);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.preenchimento {
+  margin-bottom: var(--space-lg);
+  position: relative;
+  z-index: 1;
+
+  .label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+}
+
+.barraProgresso {
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(90deg, #f0f0f0 0%, #e8e8e8 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.fill {
+  height: 100%;
+  transition: width 0.4s ease;
+  border-radius: 10px;
+}
+
+.botaoDetalhes {
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+  color: #1a1a1a;
+  border: none;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+
+  &:hover {
+    background: linear-gradient(135deg, var(--color-secondary-light) 0%, #d4af37 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--space-lg);
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .badge {
+    align-self: flex-start;
+  }
+
+  .infoItem {
+    font-size: 0.9rem;
+  }
+
+  .nome {
+    font-size: 1.1rem;
+  }
+}

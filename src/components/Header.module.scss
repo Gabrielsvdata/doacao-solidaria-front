@@ -1,0 +1,163 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
+  box-shadow: 0 6px 20px rgba(45, 122, 74, 0.12);
+  border-bottom: 4px solid var(--color-primary);
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-md);
+}
+
+.logoArea {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-md);
+  padding: 0 var(--space-lg);
+  border-right: 3px solid var(--color-border);
+  padding-right: var(--space-lg);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.brasao {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(45, 122, 74, 0.1));
+}
+
+.fundoSocialLogo {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(45, 122, 74, 0.1));
+}
+
+.divider {
+  width: 2px;
+  height: 50px;
+  background: linear-gradient(180deg, rgba(45, 122, 74, 0.2) 0%, rgba(45, 122, 74, 0.05) 100%);
+  margin: 0 var(--space-sm);
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin: 0;
+    color: var(--color-primary);
+    letter-spacing: -0.5px;
+    font-family: 'Arial Black', Arial, sans-serif;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex: 0;
+  margin-left: auto;
+
+  @media (max-width: 768px) {
+    gap: var(--space-md);
+  }
+}
+
+.navLink {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: var(--space-md) 0;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+  border-bottom: 3px solid transparent;
+
+  &:hover {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-secondary);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: var(--space-sm) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+  }
+
+  .logoArea {
+    padding: 0 var(--space-md);
+    padding-right: var(--space-md);
+    border-right: 2px solid var(--color-border);
+    gap: var(--space-sm);
+  }
+
+  .brasao {
+    width: 45px;
+    height: 45px;
+  }
+
+  .fundoSocialLogo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .divider {
+    height: 40px;
+  }
+
+  .headerText h1 {
+    font-size: 0.95rem;
+  }
+
+  .headerText .subtitle {
+    font-size: 0.65rem;
+  }
+
+  .nav {
+    gap: var(--space-md);
+  }
+
+  .navLink {
+    font-size: 0.8rem;
+    padding: var(--space-sm) 0;
+  }
+}

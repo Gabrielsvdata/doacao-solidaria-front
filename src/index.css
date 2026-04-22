@@ -1,0 +1,205 @@
+﻿/* ============================================ */
+/* DESIGN SYSTEM - CORES */
+/* ============================================ */
+:root {
+  /* Primária - Verde Fundo Social */
+  --color-primary: #2d7a4a;
+  --color-primary-light: #52a96f;
+  --color-primary-dark: #1f5333;
+  --color-primary-bg: #e8f5f0;
+
+  /* Secundária - Amarelo Fundo Social */
+  --color-secondary: #d4af37;
+  --color-secondary-light: #e8c547;
+  --color-secondary-dark: #b8931d;
+  --color-secondary-bg: #fffaed;
+
+  /* Status */
+  --color-success: #2d7a4a;
+  --color-success-light: #52a96f;
+  --color-success-dark: #1f5333;
+  --color-success-bg: #e8f5f0;
+
+  --color-warning: #fdcb6e;
+  --color-warning-dark: #e17055;
+  --color-danger: #dc2626;
+  --color-danger-bg: #ffe8e8;
+
+  /* Neutros */
+  --color-white: #ffffff;
+  --color-bg-light: #f8faf9;
+  --color-bg-secondary: #f0f2f1;
+  --color-text: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-light: #d1d5db;
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f3;
+
+  /* Espaçamento */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(45, 122, 74, 0.08);
+  --shadow-md: 0 4px 6px rgba(45, 122, 74, 0.12);
+  --shadow-lg: 0 10px 15px rgba(45, 122, 74, 0.15);
+  --shadow-xl: 0 20px 25px rgba(45, 122, 74, 0.2);
+
+  /* Transições */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ============================================ */
+/* RESET GLOBAL */
+/* ============================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================ */
+/* TIPOGRAFIA */
+/* ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+h1 { font-size: 40px; }
+h2 { font-size: 32px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+
+p {
+  margin-bottom: var(--space-md);
+  line-height: 1.75;
+}
+
+/* ============================================ */
+/* LINKS */
+/* ============================================ */
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+a:active {
+  color: var(--color-primary-dark);
+}
+
+/* ============================================ */
+/* FORMULÁRIOS */
+/* ============================================ */
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-white);
+  color: var(--color-text);
+  transition: all var(--transition-base);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-bg);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled,
+button:disabled {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-light);
+  cursor: not-allowed;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ============================================ */
+/* UTILITÁRIOS */
+/* ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
