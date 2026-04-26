@@ -33,7 +33,7 @@ export default function Login() {
       }
     } catch (error) {
       console.error('Erro no login:', error);
-      setErro(error.response?.data?.message || 'Credenciais inválidas');
+      setErro(error.response?.data?.erro || error.response?.data?.message || 'Credenciais inválidas');
       setSenha('');
     } finally {
       setCarregando(false);
