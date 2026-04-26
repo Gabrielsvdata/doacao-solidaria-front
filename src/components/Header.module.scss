@@ -8,13 +8,13 @@
 }
 
 .container {
-  width: 90%;
-  margin: 0 auto;
-  padding: var(--space-md) var(--space-lg);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .logoArea {
@@ -22,10 +22,10 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  gap: var(--space-md);
-  padding: 0 var(--space-lg);
+  gap: var(--space-sm);
+  padding: 0 var(--space-md);
   border-right: 3px solid var(--color-border);
-  padding-right: var(--space-lg);
+  padding-right: var(--space-md);
   transition: all 0.3s ease;
 
   &:hover {
@@ -84,7 +84,7 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
   flex: 0;
   margin-left: auto;
 
@@ -98,7 +98,7 @@
   text-decoration: none;
   font-weight: 700;
   font-size: 1rem;
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) 0;
   border-radius: 0;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -140,9 +140,9 @@
 
 @media (max-width: 768px) {
   .container {
-    width: 95%;
+    width: 100%;
     gap: var(--space-sm);
-    padding: var(--space-md) 0;
+    padding: var(--space-sm) var(--space-md);
   }
 
   .logoArea {

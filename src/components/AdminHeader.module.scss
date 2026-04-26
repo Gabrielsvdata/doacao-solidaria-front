@@ -2,15 +2,14 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
-  border-bottom: 4px solid #2d7a4a;
+  background: linear-gradient(135deg, #1f5333 0%, #2d7a4a 100%);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  padding: var(--space-sm) 0;
+  padding: var(--space-xs) 0;
 
   .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--space-lg);
+    width: 100%;
+    margin: 0;
+    padding: 0 var(--space-md);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,7 +20,7 @@
 .logoArea {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   text-decoration: none;
   color: white;
   transition: opacity var(--transition-base);
@@ -72,7 +71,7 @@
 .userSection {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .userInfo {
@@ -105,7 +104,7 @@
   background: #dc2626;
   color: white;
   border: none;
-  padding: var(--space-sm) var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;

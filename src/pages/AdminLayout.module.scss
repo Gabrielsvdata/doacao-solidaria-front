@@ -1,6 +1,6 @@
 .adminLayout {
   display: flex;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 84px);
   background: var(--color-bg-light);
 }
 
@@ -11,12 +11,12 @@
   transition: margin-left var(--transition-base);
 
   @media (max-width: 768px) {
-    margin-left: 80px;
+    margin-left: 70px;
   }
 }
 
 @media (max-width: 480px) {
   .mainContent {
-    margin-left: 80px;
+    margin-left: 65px;
   }
 }

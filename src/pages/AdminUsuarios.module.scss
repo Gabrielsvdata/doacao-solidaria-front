@@ -1,11 +1,8 @@
 .usuariosPage {
-  padding: var(--space-lg);
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    padding: var(--space-md);
-  }
+  padding: var(--space-md);
+  max-width: 100%;
+  margin: 0;
+  width: 100%;
 }
 
 .header {

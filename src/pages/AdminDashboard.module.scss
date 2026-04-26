@@ -1,7 +1,8 @@
 .dashboardPage {
-  padding: var(--space-lg);
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: var(--space-md);
+  max-width: 100%;
+  margin: 0;
+  width: 100%;
 
   @media (max-width: 768px) {
     padding: var(--space-md);
@@ -74,17 +75,20 @@
 /* Métricas Grid */
 .metricsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--space-md);
   margin-bottom: var(--space-lg);
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
+    padding: 0 var(--space-sm);
   }
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    padding: 0;
   }
 }
 
