@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { logout, getAuth } from '../services/auth';
+import { 
+  BarChartIcon, GiftIcon, TruckIcon, BoxIcon, 
+  BuildingIcon, UsersIcon, MenuIcon, XIcon, LogoutIcon 
+} from './Icons';
 import styles from './Sidebar.module.scss';
 
 export default function Sidebar() {
@@ -14,12 +18,12 @@ export default function Sidebar() {
   };
 
   const menuItems = [
-    { path: '/admin/dashboard', icon: '📊', label: 'Dashboard' },
-    { path: '/admin/doacoes', icon: '🎁', label: 'Doações' },
-    { path: '/admin/distribuicoes', icon: '🚚', label: 'Distribuições' },
-    { path: '/admin/estoque', icon: '📦', label: 'Estoque' },
-    { path: '/admin/instituicoes', icon: '🏢', label: 'Instituições' },
-    { path: '/admin/usuarios', icon: '👥', label: 'Usuários' }
+    { path: '/admin/dashboard', Icon: BarChartIcon, label: 'Dashboard' },
+    { path: '/admin/doacoes', Icon: GiftIcon, label: 'Doações' },
+    { path: '/admin/distribuicoes', Icon: TruckIcon, label: 'Distribuições' },
+    { path: '/admin/estoque', Icon: BoxIcon, label: 'Estoque' },
+    { path: '/admin/instituicoes', Icon: BuildingIcon, label: 'Instituições' },
+    { path: '/admin/usuarios', Icon: UsersIcon, label: 'Usuários' }
   ];
 
   return (
@@ -29,10 +33,11 @@ export default function Sidebar() {
           className={styles.toggleBtn}
           onClick={() => setCollapsed(!collapsed)}
           aria-label="Alternar sidebar"
+          title={collapsed ? "Expandir" : "Recolher"}
         >
-          ☰
+          {collapsed ? <MenuIcon size={24} color="white" /> : <XIcon size={24} color="white" />}
         </button>
-        {!collapsed && <h2>Doação Solidária</h2>}
+        {!collapsed && <h2>Menu</h2>}
       </div>
 
       <nav className={styles.nav}>
@@ -42,7 +47,9 @@ export default function Sidebar() {
             to={item.path}
             className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
           >
-            <span className={styles.icon}>{item.icon}</span>
+            <span className={styles.icon}>
+              <item.Icon size={22} color="currentColor" />
+            </span>
             {!collapsed && <span className={styles.label}>{item.label}</span>}
           </NavLink>
         ))}
@@ -60,7 +67,8 @@ export default function Sidebar() {
           onClick={handleLogout}
           title="Sair"
         >
-          {collapsed ? '🚪' : '🚪 Sair'}
+          <LogoutIcon size={20} color="white" />
+          {!collapsed && <span>Sair</span>}
         </button>
       </div>
     </aside>
