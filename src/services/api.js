@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = process.env.NODE_ENV === 'production' 
-  ? 'https://doacao-solidaria-backend.onrender.com'
-  : 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
 
 // ============= DOADOR (Sem autenticação) =============
 

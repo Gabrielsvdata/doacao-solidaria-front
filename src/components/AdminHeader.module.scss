@@ -1,0 +1,166 @@
+.adminHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+  border-bottom: 4px solid #2c5282;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  padding: var(--space-sm) 0;
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+  }
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-decoration: none;
+  color: white;
+  transition: opacity var(--transition-base);
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.brasao {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  object-fit: contain;
+}
+
+.headerText {
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+  }
+
+  p {
+    font-size: 0.7rem;
+    margin: 2px 0 0 0;
+    color: #cbd5e0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.userName {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.logoutBtn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: 0.9rem;
+
+  &:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .adminHeader {
+    padding: var(--space-sm) 0;
+
+    .container {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+  }
+
+  .brasao {
+    width: 50px;
+    height: 50px;
+  }
+
+  .headerText h1 {
+    font-size: 1.1rem;
+  }
+
+  .userName {
+    font-size: 0.85rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-width: 120px;
+  }
+
+  .logoutBtn {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminHeader {
+    .container {
+      padding: 0 var(--space-md);
+    }
+  }
+
+  .brasao {
+    width: 45px;
+    height: 45px;
+  }
+
+  .headerText {
+    h1 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.65rem;
+    }
+  }
+
+  .userSection {
+    gap: var(--space-sm);
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .userName {
+    font-size: 0.8rem;
+    padding: var(--space-xs);
+    min-width: auto;
+  }
+
+  .logoutBtn {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.8rem;
+  }
+}
