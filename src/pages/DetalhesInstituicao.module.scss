@@ -4,10 +4,24 @@
 }
 
 .main {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
   animation: fadeIn 0.3s ease-in;
+
+  @media (max-width: 1024px) {
+    max-width: 900px;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 }
 
 @keyframes fadeIn {
@@ -115,8 +129,18 @@
   gap: 2rem;
   margin-bottom: 2rem;
 
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
   }
 }
 

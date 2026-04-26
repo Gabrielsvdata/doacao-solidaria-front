@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { HomeIcon, DonorIcon, AdminIcon } from './Icons';
 import styles from './Header.module.scss';
 
 export default function Header() {
@@ -15,9 +16,18 @@ export default function Header() {
           </div>
         </Link>
         <nav className={styles.nav}>
-          <Link to="/" className={styles.navLink}>Home</Link>
-          <Link to="/doador" className={styles.navLink}>Doador</Link>
-          <Link to="/admin/login" className={styles.navLink}>Admin</Link>
+          <Link to="/" className={styles.navLink}>
+            <HomeIcon size={20} color="#2d7a4a" />
+            <span>Home</span>
+          </Link>
+          <Link to="/doador" className={styles.navLink}>
+            <DonorIcon size={20} color="#2d7a4a" />
+            <span>Doador</span>
+          </Link>
+          <Link to="/admin/login" className={styles.navLink}>
+            <AdminIcon size={20} color="#2d7a4a" />
+            <span>Admin</span>
+          </Link>
         </nav>
       </div>
     </header>

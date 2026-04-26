@@ -104,15 +104,37 @@
   white-space: nowrap;
   position: relative;
   border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  svg {
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
 
   &:hover {
     color: var(--color-primary);
     border-bottom-color: var(--color-secondary);
+
+    svg {
+      transform: translateY(-2px);
+      filter: drop-shadow(0 2px 4px rgba(45, 122, 74, 0.2));
+    }
   }
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
     padding: var(--space-sm) 0;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 2px;
+
+    span {
+      font-size: 0.75rem;
+    }
   }
 }
 
