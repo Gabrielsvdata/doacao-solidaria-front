@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
 
+// Validar configuração em modo desenvolvimento
+if (import.meta.env.DEV && API_BASE === 'http://localhost:5000') {
+  console.warn('⚠️ API_BASE using default localhost. Verifique .env.development para configuração correta.');
+}
+
 // ============= DOADOR (Sem autenticação) =============
 
 export const getCategorias = () => 
@@ -9,11 +14,6 @@ export const getCategorias = () =>
 
 export const getRecomendacao = (categoriaId) => 
   axios.post(`${API_BASE}/doador/recomendacao`, { categoria_id: categoriaId });
-
-// ============= INSTITUIÇÕES (Sem autenticação) =============
-
-export const getInstituicao = (id) => 
-  axios.get(`${API_BASE}/instituicoes/${id}`);
 
 // ============= ADMIN (Com autenticação) =============
 
@@ -40,6 +40,26 @@ export const getAnalise = (token) =>
 // Doações Recebidas
 export const getDoacoes = (token) => 
   axios.get(`${API_BASE}/admin/doacoes`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+
+// Doações - Sistema de Validação
+export const createDoacao = (data) => 
+  axios.post(`${API_BASE}/doacoes`, data);
+
+export const getDoacoesValidacao = (filters = {}, token) => 
+  axios.get(`${API_BASE}/doacoes`, {
+    params: filters,
+    headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+  });
+
+export const getDoacaoDetalhes = (id, token) => 
+  axios.get(`${API_BASE}/doacoes/${id}`, {
+    headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+  });
+
+export const validarDoacao = (id, data, token) => 
+  axios.put(`${API_BASE}/doacoes/${id}/validar`, data, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
 

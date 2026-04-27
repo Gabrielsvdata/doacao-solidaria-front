@@ -1,16 +1,46 @@
 import { useState, useEffect } from 'react';
-import { getDoacoes } from '../services/api';
+import { getDoacoesValidacao } from '../services/api';
 import { getAuth } from '../services/auth';
 import SearchBar from '../components/SearchBar';
-import styles from './AdminDoacoes.module.scss';
+import styles from './AdminHistoricoDoações.module.scss';
 
 // Função utilitária para formatar datas
 const formatarData = (dataString) => {
   if (!dataString) return 'N/A';
   try {
-    const data = new Date(dataString);
+    let data;
+    if (dataString.includes('T')) {
+      const [ano, mes, dia] = dataString.split('T')[0].split('-');
+      data = new Date(ano, mes - 1, dia);
+    } else if (dataString.includes('-')) {
+      const [ano, mes, dia] = dataString.split('-');
+      data = new Date(ano, mes - 1, dia);
+    } else {
+      data = new Date(dataString);
+    }
     if (isNaN(data.getTime())) return 'N/A';
     return data.toLocaleDateString('pt-BR');
+  } catch {
+    return 'N/A';
+  }
+};
+
+// Função para formatar data com hora
+const formatarDataCompleta = (dataString) => {
+  if (!dataString) return 'N/A';
+  try {
+    let data;
+    if (dataString.includes('T')) {
+      const [ano, mes, dia] = dataString.split('T')[0].split('-');
+      data = new Date(ano, mes - 1, dia);
+    } else if (dataString.includes('-')) {
+      const [ano, mes, dia] = dataString.split('-');
+      data = new Date(ano, mes - 1, dia);
+    } else {
+      data = new Date(dataString);
+    }
+    if (isNaN(data.getTime())) return 'N/A';
+    return data.toLocaleString('pt-BR');
   } catch {
     return 'N/A';
   }
@@ -28,10 +58,11 @@ const parseData = (dataString) => {
   }
 };
 
-export default function AdminDoacoes() {
+export default function AdminHistoricoDoações() {
   const [doacoes, setDoacoes] = useState([]);
   const [doacoesFiltradas, setDoacoesFiltradas] = useState([]);
   const [busca, setBusca] = useState('');
+  const [abaSelecionada, setAbaSelecionada] = useState('APROVADA');
   const [filtro, setFiltro] = useState({
     instituicao: '',
     categoria: '',
@@ -40,10 +71,11 @@ export default function AdminDoacoes() {
   });
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
+  const [contadores, setContadores] = useState({ APROVADA: 0, REJEITADA: 0 });
 
   useEffect(() => {
     carregarDoacoes();
-  }, []);
+  }, [abaSelecionada]);
 
   useEffect(() => {
     aplicarFiltros();
@@ -53,9 +85,24 @@ export default function AdminDoacoes() {
     try {
       setCarregando(true);
       setErro('');
-      const token = getAuth()?.id;
-      const response = await getDoacoes(token);
-      setDoacoes(response.data?.doacoes || []);
+      const token = getAuth()?.token;
+      
+      // Carregar doações aprovadas
+      const resAprovadas = await getDoacoesValidacao({ status: 'APROVADA' }, token);
+      const doacoesAprovadas = resAprovadas.data?.doacoes || resAprovadas.data || [];
+      
+      // Carregar doações rejeitadas
+      const resRejeitadas = await getDoacoesValidacao({ status: 'REJEITADA' }, token);
+      const doacoesRejeitadas = resRejeitadas.data?.doacoes || resRejeitadas.data || [];
+      
+      // Determinar qual lista usar baseado na aba
+      const doacoesParaMostrar = abaSelecionada === 'APROVADA' ? doacoesAprovadas : doacoesRejeitadas;
+      
+      setDoacoes(doacoesParaMostrar);
+      setContadores({
+        APROVADA: Array.isArray(doacoesAprovadas) ? doacoesAprovadas.length : 0,
+        REJEITADA: Array.isArray(doacoesRejeitadas) ? doacoesRejeitadas.length : 0
+      });
     } catch (error) {
       console.error('Erro ao carregar doações:', error);
       setErro('Erro ao carregar doações');
@@ -73,7 +120,8 @@ export default function AdminDoacoes() {
       resultado = resultado.filter(d =>
         (d.doador_nome?.toLowerCase().includes(termo) ||
         d.instituicao?.toLowerCase().includes(termo) ||
-        d.categoria?.toLowerCase().includes(termo))
+        d.categoria?.toLowerCase().includes(termo) ||
+        d.doador_telefone?.includes(termo))
       );
     }
 
@@ -87,10 +135,10 @@ export default function AdminDoacoes() {
       resultado = resultado.filter(d => d.categoria === filtro.categoria);
     }
 
-    // Filtro por data (intervalo)
+    // Filtro por data (intervalo de data_agendamento)
     if (filtro.dataInicio || filtro.dataFim) {
       resultado = resultado.filter(d => {
-        const data = parseData(d.data_doacao);
+        const data = parseData(d.data_agendamento);
         if (!data) return false;
         const inicio = filtro.dataInicio ? new Date(filtro.dataInicio) : new Date(0);
         const fim = filtro.dataFim ? new Date(filtro.dataFim) : new Date();
@@ -135,8 +183,8 @@ export default function AdminDoacoes() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Doações Registradas</h1>
-        <p>Histórico completo de doações realizadas</p>
+        <h1>📋 Histórico de Doações</h1>
+        <p>Doações aprovadas e rejeitadas durante a validação</p>
       </header>
 
       {erro && (
@@ -145,16 +193,35 @@ export default function AdminDoacoes() {
         </div>
       )}
 
+      {/* Abas de Status */}
+      <div className={styles.abas}>
+        <button 
+          className={`${styles.aba} ${abaSelecionada === 'APROVADA' ? styles.ativo : ''}`}
+          onClick={() => setAbaSelecionada('APROVADA')}
+        >
+          ✓ Aprovadas <span className={styles.contador}>{contadores.APROVADA}</span>
+        </button>
+        <button 
+          className={`${styles.aba} ${abaSelecionada === 'REJEITADA' ? styles.ativo : ''}`}
+          onClick={() => setAbaSelecionada('REJEITADA')}
+        >
+          ✕ Rejeitadas <span className={styles.contador}>{contadores.REJEITADA}</span>
+        </button>
+      </div>
+
       {/* Seção de Filtros */}
       <div className={styles.filtrosSecao}>
         <div className={styles.filtrosTop}>
           <SearchBar 
             valor={busca} 
-            onChange={handleBusca}
+            onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar por doador, instituição ou categoria..."
           />
           {(busca || filtro.instituicao || filtro.categoria || filtro.dataInicio || filtro.dataFim) && (
-            <button className={styles.btnLimpar} onClick={limparFiltros}>
+            <button className={styles.btnLimpar} onClick={() => {
+              setBusca('');
+              setFiltro({ instituicao: '', categoria: '', dataInicio: '', dataFim: '' });
+            }}>
               ✕ Limpar filtros
             </button>
           )}
@@ -163,7 +230,10 @@ export default function AdminDoacoes() {
         <div className={styles.filtrosGrid}>
           <div className={styles.filtroGrupo}>
             <label>Instituição:</label>
-            <select name="instituicao" value={filtro.instituicao} onChange={handleFiltro}>
+            <select 
+              value={filtro.instituicao} 
+              onChange={(e) => setFiltro(prev => ({ ...prev, instituicao: e.target.value }))}
+            >
               <option value="">Todas</option>
               {instituicoes.map(inst => (
                 <option key={inst} value={inst}>{inst}</option>
@@ -173,7 +243,10 @@ export default function AdminDoacoes() {
 
           <div className={styles.filtroGrupo}>
             <label>Categoria:</label>
-            <select name="categoria" value={filtro.categoria} onChange={handleFiltro}>
+            <select 
+              value={filtro.categoria}
+              onChange={(e) => setFiltro(prev => ({ ...prev, categoria: e.target.value }))}
+            >
               <option value="">Todas</option>
               {categorias.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
@@ -185,9 +258,8 @@ export default function AdminDoacoes() {
             <label>Data início:</label>
             <input 
               type="date" 
-              name="dataInicio" 
               value={filtro.dataInicio}
-              onChange={handleFiltro}
+              onChange={(e) => setFiltro(prev => ({ ...prev, dataInicio: e.target.value }))}
             />
           </div>
 
@@ -195,9 +267,8 @@ export default function AdminDoacoes() {
             <label>Data fim:</label>
             <input 
               type="date" 
-              name="dataFim" 
               value={filtro.dataFim}
-              onChange={handleFiltro}
+              onChange={(e) => setFiltro(prev => ({ ...prev, dataFim: e.target.value }))}
             />
           </div>
         </div>
@@ -215,23 +286,27 @@ export default function AdminDoacoes() {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Nome do Doador</th>
+                <th>Doador</th>
                 <th>Telefone</th>
-                <th>Instituição</th>
                 <th>Categoria</th>
                 <th>Quantidade</th>
-                <th>Data</th>
+                <th>Instituição</th>
+                <th>Data Agendada</th>
+                <th>Data Validação</th>
+                {abaSelecionada === 'REJEITADA' && <th>Motivo Rejeição</th>}
               </tr>
             </thead>
             <tbody>
-              {doacoesFiltradas.map((doacao, idx) => (
-                <tr key={idx}>
-                  <td>{doacao.doador_nome || 'N/A'}</td>
-                  <td>{doacao.telefone || 'N/A'}</td>
-                  <td>{doacao.instituicao || 'N/A'}</td>
-                  <td>{doacao.categoria || 'N/A'}</td>
-                  <td className={styles.quantidade}>{doacao.quantidade_doada || 0}</td>
-                  <td>{formatarData(doacao.data_doacao)}</td>
+              {doacoesFiltradas.map((doacao) => (
+                <tr key={doacao.id} className={abaSelecionada === 'REJEITADA' ? styles.rejeitada : styles.aprovada}>
+                  <td className={styles.doador}>{doacao.doador_nome}</td>
+                  <td>{doacao.doador_telefone}</td>
+                  <td>{doacao.categoria}</td>
+                  <td className={styles.quantidade}>{doacao.quantidade} {doacao.unidade}</td>
+                  <td>{doacao.instituicao}</td>
+                  <td>{formatarData(doacao.data_agendamento)}</td>
+                  <td>{formatarDataCompleta(doacao.data_validacao)}</td>
+                  {abaSelecionada === 'REJEITADA' && <td className={styles.motivo}>{doacao.motivo_rejeicao || 'N/A'}</td>}
                 </tr>
               ))}
             </tbody>
@@ -239,7 +314,7 @@ export default function AdminDoacoes() {
         </div>
       ) : (
         <div className={styles.vazio}>
-          <p>Nenhuma doação encontrada com os filtros aplicados.</p>
+          <p>Nenhuma doação {abaSelecionada === 'APROVADA' ? 'aprovada' : 'rejeitada'} encontrada.</p>
         </div>
       )}
     </div>

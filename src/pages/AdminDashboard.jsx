@@ -5,6 +5,8 @@ import {
   BarChart, Bar, PieChart, Pie, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
 } from 'recharts';
+import EstoqueGaugeCard from '../components/EstoqueGaugeCard';
+import MovimentacoesBarChart from '../components/MovimentacoesBarChart';
 import styles from './AdminDashboard.module.scss';
 
 export default function AdminDashboard() {
@@ -29,11 +31,9 @@ export default function AdminDashboard() {
       setErro('');
       const token = getAuth()?.id;
 
-      // Carregar análise
       const response = await getAnalise(token);
       setAnalise(response.data?.analise || {});
 
-      // Carregar tendência de movimentações
       const resTendencia = await getTendenciaMovimentacoes(token);
       const dadosTendencia = resTendencia.data?.tendencia || [];
       setTendencia(dadosTendencia.map(item => ({
@@ -41,7 +41,6 @@ export default function AdminDashboard() {
         quantidade: item.quantidade
       })));
 
-      // Carregar métricas
       const resDoacoes = await getDoacoes(token);
       const resDistribuicoes = await getDistribuicoes(token);
       const resEstoque = await getEstoque(token);
@@ -57,8 +56,8 @@ export default function AdminDashboard() {
       console.error('Erro ao carregar análise:', error);
       setErro('Erro ao carregar dados do dashboard');
       setAnalise({
-        por_categoria: {},
-        status_geral: {},
+        por_categoria: [],
+        status_geral: [],
         instituicoes_criticas: [],
         movimentacoes_recentes: []
       });
@@ -101,7 +100,6 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Métricas Principais */}
       <div className={styles.metricsGrid}>
         <div className={styles.metricCard}>
           <div className={styles.metricIcon}>📦</div>
@@ -136,9 +134,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Gráficos */}
       <div className={styles.graficosContainer}>
-        {/* BarChart - Por Categoria */}
         {analise?.por_categoria && Array.isArray(analise.por_categoria) && analise.por_categoria.length > 0 && (
           <div className={styles.graficoCard}>
             <h3>Preenchimento por Categoria</h3>
@@ -154,21 +150,12 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* PieChart - Status Geral */}
         {analise?.status_geral && Array.isArray(analise.status_geral) && analise.status_geral.length > 0 && (
           <div className={styles.graficoCard}>
             <h3>Distribuição por Status</h3>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
-                <Pie
-                  data={analise.status_geral}
-                  dataKey="quantidade"
-                  nameKey="status"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  label
-                >
+                <Pie data={analise.status_geral} dataKey="quantidade" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>
                   {analise.status_geral.map((item, idx) => {
                     const statusLower = String(item.status || '').toLowerCase();
                     let cor = '#6c5ce7';
@@ -184,30 +171,8 @@ export default function AdminDashboard() {
             </ResponsiveContainer>
           </div>
         )}
-
-        {/* LineChart - Movimentações Recentes */}
-        {analise?.movimentacoes_recentes && Array.isArray(analise.movimentacoes_recentes) && analise.movimentacoes_recentes.length > 0 && (
-          <div className={styles.graficoCard}>
-            <h3>Movimentações Recentes (Tendência)</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={analise.movimentacoes_recentes.slice(0, 10).map((item, idx) => ({
-                ...item,
-                label: item.categoria || 'Mov.' + idx,
-                data: item.data_movimento ? new Date(item.data_movimento).toLocaleDateString('pt-BR') : 'N/A'
-              }))}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="data" angle={-45} textAnchor="end" height={80} />
-                <YAxis />
-                <Tooltip formatter={(value) => `${value} itens`} />
-                <Legend />
-                <Line type="monotone" dataKey="quantidade" stroke="#6c5ce7" name="Quantidade" strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        )}
       </div>
 
-      {/* Status Geral */}
       {analise?.status_geral && Array.isArray(analise.status_geral) && analise.status_geral.length > 0 && (
         <div className={styles.section}>
           <h2>Status Geral do Sistema</h2>
@@ -225,7 +190,6 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Por Categoria */}
       {analise?.por_categoria && Array.isArray(analise.por_categoria) && analise.por_categoria.length > 0 && (
         <div className={styles.section}>
           <h2>Distribuição por Categoria</h2>
@@ -239,10 +203,7 @@ export default function AdminDashboard() {
                     <span className={styles.categoriaBadge}>{qtd}%</span>
                   </div>
                   <div className={styles.progressBar}>
-                    <div 
-                      className={styles.progressFill}
-                      style={{ width: `${Math.min(qtd, 100)}%` }}
-                    ></div>
+                    <div className={styles.progressFill} style={{ width: `${Math.min(qtd, 100)}%` }}></div>
                   </div>
                 </div>
               );
@@ -251,7 +212,6 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Instituições Críticas */}
       {analise?.instituicoes_criticas && Array.isArray(analise.instituicoes_criticas) && analise.instituicoes_criticas.length > 0 && (
         <div className={styles.section}>
           <h2>⚠️ Instituições em Situação Crítica</h2>
@@ -287,65 +247,65 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Tendência de Movimentações */}
-      {tendencia && tendencia.length > 0 && (
+      {analise?.por_categoria && Array.isArray(analise.por_categoria) && analise.por_categoria.length > 0 && (
         <div className={styles.section}>
-          <h2>📊 Movimentações Recentes (Tendência)</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={tendencia}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="data" 
-                angle={-45}
-                textAnchor="end"
-                height={80}
+          <h2>📦 Estoque Atual (Gauge)</h2>
+          <div className={styles.gaugesGrid}>
+            {analise.por_categoria.map((cat) => (
+              <EstoqueGaugeCard
+                key={`gauge-${cat.id}`}
+                categoria={String(cat.categoria || cat.nome || 'Sem nome')}
+                percentual={Number(cat.percentual_preenchido) || 0}
+                quantidade={Number(cat.total_quantidade) || 0}
+                capacidade={Number(cat.total_capacidade) || 0}
               />
-              <YAxis />
-              <Tooltip 
-                formatter={(value) => [`${value} items`, 'Quantidade']}
-                labelFormatter={(label) => `${label}`}
-              />
-              <Legend />
-              <Line 
-                type="monotone" 
-                dataKey="quantidade" 
-                stroke="#7c3aed" 
-                strokeWidth={2}
-                dot={{ fill: '#7c3aed', r: 4 }}
-                activeDot={{ r: 6 }}
-                name="Quantidade"
-              />
-            </LineChart>
-          </ResponsiveContainer>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Movimentações Recentes */}
       {analise?.movimentacoes_recentes && Array.isArray(analise.movimentacoes_recentes) && analise.movimentacoes_recentes.length > 0 && (
         <div className={styles.section}>
-          <h2>Movimentações Recentes</h2>
-          <div className={styles.movimentacoesList}>
-            {analise.movimentacoes_recentes.map((mov, idx) => {
-              const tipo = String(mov.tipo || 'entrada').toLowerCase();
-              const descricao = mov.descricao || `${mov.categoria} - ${mov.instituicao}`;
-              const data = mov.data_movimento ? new Date(mov.data_movimento).toLocaleDateString('pt-BR') : 'Recentemente';
-              return (
-                <div key={mov.id || idx} className={styles.movimentacaoItem}>
-                  <div className={styles.movimentacaoIcon}>
-                    {tipo.includes('entrada') ? '📥' : '📤'}
-                  </div>
-                  <div className={styles.movimentacaoContent}>
-                    <p className={styles.movimentacaoDescricao}>
-                      {String(descricao)} ({mov.quantidade} itens)
-                    </p>
-                    <span className={styles.movimentacaoHorario}>
-                      {data}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <MovimentacoesBarChart
+            dados={analise.movimentacoes_recentes.slice(0, 14).reduce((acc, item) => {
+              const dataStr = item.data_movimento ? new Date(item.data_movimento).toLocaleDateString('pt-BR') : 'N/A';
+              const existing = acc.find(d => d.data === dataStr);
+              const quantidade = Number(item.quantidade) || 0;
+              const tipo = String(item.tipo || 'entrada').toLowerCase();
+              
+              if (existing) {
+                if (tipo.includes('entrada')) {
+                  existing.entrada += quantidade;
+                } else {
+                  existing.saida += quantidade;
+                }
+              } else {
+                acc.push({
+                  data: dataStr,
+                  entrada: tipo.includes('entrada') ? quantidade : 0,
+                  saida: !tipo.includes('entrada') ? quantidade : 0,
+                });
+              }
+              return acc;
+            }, [])}
+            titulo="📊 Movimentações Recentes (Entrada vs Saída)"
+          />
+        </div>
+      )}
+
+      {tendencia && tendencia.length > 0 && (
+        <div className={styles.section}>
+          <h2>📈 Movimentações (Tendência)</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={tendencia}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="data" angle={-45} textAnchor="end" height={80} />
+              <YAxis />
+              <Tooltip formatter={(value) => [`${value} items`, 'Quantidade']} labelFormatter={(label) => `${label}`} />
+              <Legend />
+              <Line type="monotone" dataKey="quantidade" stroke="#7c3aed" strokeWidth={2} dot={{ fill: '#7c3aed', r: 4 }} activeDot={{ r: 6 }} name="Quantidade" />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       )}
 

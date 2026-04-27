@@ -7,6 +7,10 @@
   @media (max-width: 768px) {
     padding: var(--space-md);
   }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+  }
 }
 
 .header {
@@ -17,12 +21,25 @@
     font-weight: 700;
     color: var(--color-text-dark);
     margin: 0 0 var(--space-xs) 0;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+      margin-bottom: var(--space-xs);
+    }
   }
 
   p {
     font-size: 0.95rem;
     color: var(--color-text-muted);
     margin: 0;
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 }
 
@@ -112,6 +129,7 @@
   @media (max-width: 480px) {
     flex-direction: row;
     text-align: left;
+    padding: var(--space-sm);
   }
 }
 
@@ -119,6 +137,11 @@
   font-size: 2rem;
   min-width: 50px;
   text-align: center;
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    min-width: 40px;
+  }
 }
 
 .metricContent {
@@ -435,6 +458,15 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: var(--space-lg);
   margin: var(--space-xl) 0;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+  }
 }
 
 .graficoCard {
@@ -450,11 +482,39 @@
   }
 
   @media (max-width: 768px) {
-    grid-column: 1 / -1;
     padding: var(--space-md);
 
     h3 {
       font-size: 1rem;
+      margin-bottom: var(--space-md);
     }
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+
+    h3 {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+// ========== GAUGES GRID ==========
+.gaugesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-sm);
   }
 }

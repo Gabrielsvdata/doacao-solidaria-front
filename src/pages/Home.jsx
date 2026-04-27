@@ -6,7 +6,14 @@ export default function Home() {
     <div className={styles.home}>
       <header className={styles.header}>
         <div className={styles.headerContainer}>
-          <h1 className={styles.logo}>Doação Solidária</h1>
+          <div className={styles.logoArea}>
+            <img src="/images/brasao.png" alt="Brasão São Vicente" className={styles.brasao} />
+            <img src="/images/fundo-social.png" alt="Fundo Social São Vicente" className={styles.fundoSocialLogo} />
+            <div className={styles.headerText}>
+              <h1 className={styles.logo}>Doação Solidária</h1>
+              <p className={styles.subtitle}>FUNDO SOCIAL DE SOLIDARIEDADE</p>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -43,7 +50,7 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <p>Doação Solidária — São Vicente, SP | Projeto acadêmico</p>
+        <p>Doação Solidária — Projeto academico back end ESCOLA VAI NA WEB</p>
       </footer>
     </div>
   );

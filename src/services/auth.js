@@ -27,8 +27,3 @@ export const getUsuarioId = () => {
   const auth = getAuth();
   return auth?.id || null;
 };
-
-export const getInstituicaoId = () => {
-  const auth = getAuth();
-  return auth?.instituicao_id || null;
-};

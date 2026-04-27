@@ -48,11 +48,40 @@ export default function AdminEstoque() {
   };
 
   const obterStatus = (item) => {
-    if (!item.capacidade_maxima || item.capacidade_maxima === 0) return 'crítico';
+    if (!item.capacidade_maxima || item.capacidade_maxima === 0) return 'falta';
+    
     const percentual = (item.quantidade_atual / item.capacidade_maxima) * 100;
-    if (percentual >= 80) return 'bom';
-    if (percentual >= 50) return 'médio';
-    return 'crítico';
+    
+    if (percentual === 0) return 'falta';
+    if (percentual < 20) return 'crítico';
+    if (percentual < 50) return 'baixo';
+    if (percentual < 80) return 'médio';
+    if (percentual <= 100) return 'bom';
+    return 'excesso';  // Mais de 100%
+  };
+
+  const obterCor = (status) => {
+    const cores = {
+      'falta': '#dc2626',      // Vermelho escuro
+      'crítico': '#ef4444',    // Vermelho
+      'baixo': '#f97316',      // Laranja
+      'médio': '#f59e0b',      // Amarelo
+      'bom': '#10b981',        // Verde
+      'excesso': '#3b82f6'     // Azul
+    };
+    return cores[status] || '#6b7280';
+  };
+
+  const obterLabel = (status) => {
+    const labels = {
+      'falta': 'Sem Estoque',
+      'crítico': 'Crítico',
+      'baixo': 'Baixo',
+      'médio': 'Médio',
+      'bom': 'Adequado',
+      'excesso': 'Excesso'
+    };
+    return labels[status] || 'Desconhecido';
   };
 
   const aplicarFiltros = () => {

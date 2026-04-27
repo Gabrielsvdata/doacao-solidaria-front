@@ -213,7 +213,7 @@ export default function DetalhesInstituicao() {
               )}
 
               <div className={styles.acoes}>
-                <button className={styles.botaoPrincipal} onClick={() => alert('Funcionalidade de doação em desenvolvimento')}>
+                <button className={styles.botaoPrincipal} onClick={() => navigate(`/doacao/${id}`)}>
                   🎁 Fazer Doação
                 </button>
                 <button className={styles.botaoSecundario} onClick={() => navigate('/doador')}>

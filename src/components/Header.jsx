@@ -12,7 +12,7 @@ export default function Header() {
           <div className={styles.divider}></div>
           <div className={styles.headerText}>
             <h1>Doação Solidária</h1>
-            <p className={styles.subtitle}>FUNDO SOCIAL DE SÃO VICENTE</p>
+            <p className={styles.subtitle}>FUNDO SOCIAL DE SOLIDARIEDADE</p>
           </div>
         </Link>
         <nav className={styles.nav}>

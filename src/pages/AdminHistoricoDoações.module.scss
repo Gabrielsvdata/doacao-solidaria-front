@@ -228,3 +228,83 @@
   color: var(--color-primary);
 }
 
+// ========== ABAS ==========
+.abas {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.aba {
+  flex: 1;
+  padding: var(--space-lg) var(--space-md);
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+
+  &:hover {
+    color: var(--color-text);
+    background: var(--color-bg-light);
+  }
+
+  &.ativo {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    background: var(--color-primary-bg);
+  }
+
+  .contador {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    min-width: 24px;
+  }
+
+  &.ativo .contador {
+    background: var(--color-primary);
+    color: white;
+  }
+}
+
+// ========== LINHA TABELA ==========
+.aprovada {
+  &:hover {
+    background-color: rgba(76, 175, 80, 0.05);
+  }
+}
+
+.rejeitada {
+  &:hover {
+    background-color: rgba(244, 67, 54, 0.05);
+  }
+}
+
+.doador {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.motivo {
+  color: var(--color-danger);
+  font-style: italic;
+  max-width: 300px;
+  word-wrap: break-word;
+}

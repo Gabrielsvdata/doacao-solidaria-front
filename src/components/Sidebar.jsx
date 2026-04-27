@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { logout, getAuth } from '../services/auth';
 import { 
   BarChartIcon, GiftIcon, TruckIcon, BoxIcon, 
-  BuildingIcon, UsersIcon, MenuIcon, XIcon, LogoutIcon 
+  BuildingIcon, UsersIcon, MenuIcon, XIcon, LogoutIcon, ClockIcon 
 } from './Icons';
 import styles from './Sidebar.module.scss';
 
@@ -19,7 +19,8 @@ export default function Sidebar() {
 
   const menuItems = [
     { path: '/admin/dashboard', Icon: BarChartIcon, label: 'Dashboard' },
-    { path: '/admin/doacoes', Icon: GiftIcon, label: 'Doações' },
+    { path: '/admin/doações', Icon: GiftIcon, label: 'Validar Doações', end: true },
+    { path: '/admin/doações/historico', Icon: ClockIcon, label: 'Histórico Doações', end: true },
     { path: '/admin/distribuicoes', Icon: TruckIcon, label: 'Distribuições' },
     { path: '/admin/estoque', Icon: BoxIcon, label: 'Estoque' },
     { path: '/admin/instituicoes', Icon: BuildingIcon, label: 'Instituições' },
@@ -45,6 +46,7 @@ export default function Sidebar() {
           <NavLink
             key={item.path}
             to={item.path}
+            end={item.end}
             className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}
           >
             <span className={styles.icon}>
