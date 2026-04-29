@@ -31,6 +31,10 @@
     max-width: 380px;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 480px) {
+      max-width: 95%;
+    }
   }
 
   .card {
@@ -46,23 +50,40 @@
     @media (max-width: 768px) {
       padding: var(--space-md) var(--space-xs);
     }
+
+    @media (max-width: 480px) {
+      padding: var(--space-md) var(--space-sm);
+      border-radius: 12px;
+    }
   }
 
   .header {
     text-align: center;
     margin-bottom: var(--space-sm);
 
+    @media (max-width: 480px) {
+      margin-bottom: var(--space-xs);
+    }
+
     h1 {
       font-size: 1.3rem;
       color: var(--color-text-dark);
       margin: 0 0 2px 0;
       font-weight: 700;
+
+      @media (max-width: 480px) {
+        font-size: 1.1rem;
+      }
     }
 
     p {
       color: var(--color-text-muted);
       margin: 0;
       font-size: 0.8rem;
+
+      @media (max-width: 480px) {
+        font-size: 0.75rem;
+      }
     }
   }
 

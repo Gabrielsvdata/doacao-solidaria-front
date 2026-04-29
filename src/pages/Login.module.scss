@@ -31,6 +31,10 @@
   max-width: 350px;
   position: relative;
   z-index: 1;
+
+  @media (max-width: 480px) {
+    max-width: 90%;
+  }
 }
 
 .card {
@@ -42,6 +46,11 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 20px 60px rgba(45, 122, 74, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.18);
   animation: slideUp 0.4s ease;
+
+  @media (max-width: 480px) {
+    padding: var(--space-md) var(--space-sm);
+    border-radius: 12px;
+  }
 
   @keyframes slideUp {
     from {
@@ -59,17 +68,29 @@
   text-align: center;
   margin-bottom: var(--space-lg);
 
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-md);
+  }
+
   h1 {
     font-size: 24px;
     font-weight: 700;
     margin: 0 0 var(--space-xs) 0;
     color: var(--color-primary-dark);
+
+    @media (max-width: 480px) {
+      font-size: 20px;
+    }
   }
 
   p {
     font-size: 0.9rem;
     color: var(--color-text-secondary);
     margin: 0;
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem;
+    }
   }
 }
 

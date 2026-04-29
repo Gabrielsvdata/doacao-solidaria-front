@@ -50,7 +50,7 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <p>Doação Solidária — Projeto academico back end ESCOLA VAI NA WEB</p>
+        <p>Doação Solidária — Projeto academico backend ESCOLA VAI NA WEB</p>
       </footer>
     </div>
   );

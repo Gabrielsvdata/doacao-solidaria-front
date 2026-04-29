@@ -18,17 +18,37 @@
 .header {
   margin-bottom: var(--space-xl);
 
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-md);
+  }
+
   h1 {
     font-size: 2rem;
     font-weight: 700;
     margin: 0 0 var(--space-sm) 0;
     color: var(--color-primary-dark);
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+    }
   }
 
   p {
     font-size: 1rem;
     color: var(--color-text-secondary);
     margin: 0;
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
   }
 }
 
@@ -75,6 +95,14 @@
   border-collapse: collapse;
   font-size: 0.95rem;
 
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
+
   thead {
     background: linear-gradient(135deg, var(--color-primary-bg), var(--color-bg-secondary));
     border-bottom: 2px solid var(--color-primary);
@@ -85,6 +113,16 @@
       font-weight: 600;
       color: var(--color-primary-dark);
       white-space: nowrap;
+
+      @media (max-width: 768px) {
+        padding: var(--space-md);
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 480px) {
+        padding: var(--space-sm);
+        font-size: 0.75rem;
+      }
     }
   }
 
@@ -99,6 +137,14 @@
       td {
         padding: var(--space-lg);
         color: var(--color-text);
+
+        @media (max-width: 768px) {
+          padding: var(--space-md);
+        }
+
+        @media (max-width: 480px) {
+          padding: var(--space-sm);
+        }
       }
     }
   }

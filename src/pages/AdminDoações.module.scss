@@ -2,21 +2,54 @@
   padding: var(--space-xl);
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    padding: var(--space-lg);
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+  }
 }
 
 .header {
   margin-bottom: var(--space-xxl);
+
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-md);
+  }
 
   h1 {
     font-size: 1.8rem;
     color: var(--color-primary);
     margin-bottom: var(--space-sm);
     font-weight: 700;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+    }
   }
 
   p {
     color: #666;
     font-size: 0.95rem;
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 }
 
@@ -48,6 +81,17 @@
   border-bottom: 2px solid #eee;
   padding-bottom: var(--space-md);
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    overflow-x: auto;
+  }
 }
 
 .abaBtn {
@@ -105,6 +149,14 @@
 .doacoesList {
   display: grid;
   gap: var(--space-lg);
+
+  @media (max-width: 768px) {
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-sm);
+  }
 }
 
 .doacaoCard {
@@ -128,6 +180,18 @@
   padding: var(--space-lg);
   background: linear-gradient(135deg, #f8f9fa 0%, #f0f1f3 100%);
   border-bottom: 1px solid #eee;
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .cardInfo {

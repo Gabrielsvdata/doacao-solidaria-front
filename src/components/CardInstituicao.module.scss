@@ -8,6 +8,14 @@
   position: relative;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -47,6 +55,14 @@
   color: var(--color-text-dark);
   flex: 1;
   letter-spacing: -0.3px;
+
+  @media (max-width: 768px) {
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 }
 
 .badge {

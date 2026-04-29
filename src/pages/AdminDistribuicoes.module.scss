@@ -8,16 +8,36 @@
 .header {
   margin-bottom: var(--space-xl);
 
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-md);
+  }
+
   h1 {
     font-size: 2rem;
     color: var(--color-text-dark);
     margin: 0 0 var(--space-xs) 0;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+    }
   }
 
   p {
     color: var(--color-text-muted);
     margin: 0;
     font-size: 0.95rem;
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 }
 
@@ -67,6 +87,17 @@
   border-collapse: collapse;
   font-size: 0.95rem;
 
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
   thead {
     background-color: #f9fafb;
     border-bottom: 2px solid #e5e7eb;
@@ -79,6 +110,16 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+
+      @media (max-width: 768px) {
+        padding: var(--space-sm);
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 480px) {
+        padding: var(--space-xs);
+        font-size: 0.75rem;
+      }
     }
   }
 
@@ -93,6 +134,14 @@
     td {
       padding: var(--space-md);
       color: var(--color-text-dark);
+
+      @media (max-width: 768px) {
+        padding: var(--space-sm);
+      }
+
+      @media (max-width: 480px) {
+        padding: var(--space-xs);
+      }
     }
   }
 }

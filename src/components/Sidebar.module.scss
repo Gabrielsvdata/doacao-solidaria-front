@@ -3,15 +3,30 @@
   background: linear-gradient(180deg, #1f5333 0%, #2d7a4a 100%);
   color: var(--color-white);
   height: calc(100vh - 84px);
+  min-height: calc(100vh - 84px);
   position: fixed;
   left: 0;
-  top: 78px;
+  top: 84px;
   display: flex;
   flex-direction: column;
   box-shadow: inset -2px 0 8px rgba(0, 0, 0, 0.15), 2px 2px 8px rgba(0, 0, 0, 0.1);
   transition: width var(--transition-base);
   z-index: 999;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 768px) {
+    width: 70px;
+    top: 84px;
+    height: calc(100vh - 84px);
+    min-height: calc(100vh - 84px);
+  }
+
+  @media (max-width: 480px) {
+    width: 65px;
+    top: 84px;
+    height: calc(100vh - 120px);
+    min-height: calc(100vh - 100px);
+  }
 
   &.collapsed {
     width: 80px;
@@ -219,7 +234,7 @@
 @media (max-width: 768px) {
   .sidebar {
     width: 70px;
-    top: 94px;
+    top: 84px;
 
     &.collapsed {
       width: 70px;
@@ -264,6 +279,13 @@
       .logoutBtn {
         padding: var(--space-md);
         justify-content: center;
+        gap: 0;
+
+        svg {
+          flex-shrink: 0;
+          width: 20px;
+          height: 20px;
+        }
 
         span {
           display: none;
@@ -276,7 +298,6 @@
 @media (max-width: 480px) {
   .sidebar {
     width: 65px;
-    top: 89px;
 
     .header {
       padding: var(--space-xs);
@@ -292,6 +313,14 @@
 
       .icon {
         min-width: auto;
+      }
+    }
+
+    .footer .logoutBtn {
+      svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
       }
     }
   }

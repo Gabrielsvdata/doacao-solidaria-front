@@ -9,6 +9,17 @@
   display: inline-block;
   text-align: center;
   user-select: none;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    padding: var(--space-md) var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    padding: var(--space-sm) var(--space-md);
+    width: 100%;
+  }
   
   &:focus {
     outline: none;

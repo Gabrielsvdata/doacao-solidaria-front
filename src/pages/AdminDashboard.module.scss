@@ -16,11 +16,19 @@
 .header {
   margin-bottom: var(--space-xxl);
 
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-lg);
+  }
+
   h1 {
     font-size: 2rem;
     font-weight: 700;
     color: var(--color-text-dark);
     margin: 0 0 var(--space-xs) 0;
+
+    @media (max-width: 1024px) {
+      font-size: 1.75rem;
+    }
 
     @media (max-width: 768px) {
       font-size: 1.5rem;
@@ -36,6 +44,10 @@
     font-size: 0.95rem;
     color: var(--color-text-muted);
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
 
     @media (max-width: 480px) {
       font-size: 0.85rem;
@@ -124,6 +136,11 @@
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+    flex-direction: column;
   }
 
   @media (max-width: 480px) {

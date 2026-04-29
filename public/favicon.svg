@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Fundo -->
+  <rect width="128" height="128" fill="#10b981" rx="24"/>
+  
+  <!-- Coração (símbolo de doação) -->
+  <path d="M64 106 C40 90, 20 75, 20 55 C20 40, 30 30, 40 30 C48 30, 56 36, 64 44 C72 36, 80 30, 88 30 C98 30, 108 40, 108 55 C108 75, 88 90, 64 106 Z" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Mãos ao redor (conceito de solidariedade) -->
+  <circle cx="64" cy="64" r="50" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3" stroke-dasharray="5,5"/>
+</svg>

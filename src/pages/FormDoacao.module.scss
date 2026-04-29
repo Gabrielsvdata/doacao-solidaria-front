@@ -4,6 +4,14 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   padding: var(--space-lg);
+
+  @media (max-width: 768px) {
+    padding: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-sm);
+  }
 }
 
 .main {
@@ -11,6 +19,16 @@
   max-width: 700px;
   margin: var(--space-xl) auto;
   width: 100%;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin: var(--space-lg) auto;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    margin: var(--space-md) auto;
+  }
 }
 
 .voltarBtn {
@@ -39,6 +57,15 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: var(--space-xl);
   animation: slideUp 0.5s ease-out;
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
+    border-radius: 12px;
+  }
 
   @keyframes slideUp {
     from {

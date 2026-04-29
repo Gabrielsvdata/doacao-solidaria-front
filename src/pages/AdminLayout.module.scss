@@ -3,6 +3,8 @@
   min-height: calc(100vh - 84px);
   background: var(--color-bg-light);
   margin-top: 84px;
+  gap: 0;
+  position: relative;
 }
 
 .mainContent {
@@ -11,13 +13,15 @@
   overflow-y: auto;
   transition: margin-left var(--transition-base);
 
+  @media (max-width: 1024px) {
+    margin-left: 250px;
+  }
+
   @media (max-width: 768px) {
     margin-left: 70px;
   }
-}
 
-@media (max-width: 480px) {
-  .mainContent {
+  @media (max-width: 480px) {
     margin-left: 65px;
   }
 }

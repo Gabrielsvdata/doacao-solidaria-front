@@ -156,8 +156,7 @@ export default function ConfirmacaoDoacao() {
 
             <div className={styles.infoBox}>
               <p>
-                <strong>📞 Entrega:</strong> Compareça na instituição na <strong>{formatarData(doacao?.data_agendamento)}</strong> 
-                durante o horário comercial para entregar sua doação.
+                <strong>📞 Entrega:</strong> Compareça na instituição na <strong>{formatarData(doacao?.data_agendamento)}</strong> durante o horário comercial para entregar sua doação.
               </p>
             </div>
 

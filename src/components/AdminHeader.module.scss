@@ -26,6 +26,15 @@
   text-decoration: none;
   color: white;
   transition: opacity var(--transition-base);
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    gap: var(--space-xs);
+  }
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
 
   &:hover {
     opacity: 0.9;
@@ -37,6 +46,17 @@
   height: 60px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   object-fit: contain;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+  }
+
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .fundoSocial {
@@ -44,6 +64,17 @@
   height: 65px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   object-fit: contain;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 45px;
+  }
 }
 
 .divider {
@@ -59,6 +90,26 @@
     font-weight: 700;
     margin: 0;
     color: white;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
+  }
+
+  .subtitle {
+    font-size: 0.7rem;
+    margin: 2px 0 0 0;
+    color: #cbd5e0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    @media (max-width: 480px) {
+      font-size: 0.6rem;
+    }
   }
 
   p {
@@ -67,67 +118,10 @@
     color: #cbd5e0;
     font-weight: 500;
     letter-spacing: 0.5px;
-  }
-}
 
-.userSection {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: var(--space-sm) var(--space-md);
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  min-width: 160px;
-  justify-content: center;
-
-  svg {
-    flex-shrink: 0;
-    color: #fbbf24;
-  }
-}
-
-.userName {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 120px;
-}
-
-.logoutBtn {
-  background: #dc2626;
-  color: white;
-  border: none;
-  padding: var(--space-sm) var(--space-md);
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-
-  svg {
-    flex-shrink: 0;
-  }
-
-  &:hover {
-    background: #b91c1c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-  }
-
-  &:active {
-    transform: translateY(0);
+    @media (max-width: 480px) {
+      font-size: 0.6rem;
+    }
   }
 }
 

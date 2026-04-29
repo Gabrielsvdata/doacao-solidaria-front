@@ -5,6 +5,14 @@
   width: 100%;
   max-width: 400px;
 
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+  }
+
   .input {
     width: 100%;
     padding: var(--space-sm) var(--space-md);
@@ -13,6 +21,12 @@
     border-radius: 8px;
     font-size: 0.95rem;
     transition: all var(--transition-base);
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+      padding: var(--space-sm) var(--space-sm);
+      padding-right: var(--space-lg);
+    }
 
     &:focus {
       outline: none;
@@ -33,6 +47,12 @@
     height: 18px;
     color: var(--color-primary);
     pointer-events: none;
+
+    @media (max-width: 480px) {
+      right: var(--space-sm);
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &.light {

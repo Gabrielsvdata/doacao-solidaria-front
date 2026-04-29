@@ -8,6 +8,22 @@
 .main {
   flex: 1;
   padding: var(--space-lg) var(--space-md);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md) var(--space-sm);
+  }
 }
 
 .loading {
@@ -29,12 +45,29 @@
   color: white;
   box-shadow: 0 12px 40px rgba(45, 122, 74, 0.2);
 
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
   h1 {
     font-size: 2rem;
     color: white;
     margin: 0 0 var(--space-sm) 0;
     font-weight: 800;
     letter-spacing: -0.5px;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+    }
   }
 
   p {
@@ -42,6 +75,10 @@
     color: rgba(255, 255, 255, 0.95);
     margin: 0;
     font-weight: 500;
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
   }
 }
 
@@ -50,6 +87,14 @@
   max-width: 100%;
   margin: 0 auto var(--space-lg);
 
+  @media (max-width: 768px) {
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: var(--space-sm);
+  }
+
   h2 {
     font-size: 1.8rem;
     color: var(--color-text-dark);
@@ -57,6 +102,16 @@
     text-align: center;
     font-weight: 800;
     letter-spacing: -0.3px;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.25rem;
+      margin-bottom: var(--space-sm);
+    }
   }
 }
 
@@ -66,6 +121,16 @@
   gap: var(--space-md);
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
 }
 
 .categoriaCard {
