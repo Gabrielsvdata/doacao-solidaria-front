@@ -377,6 +377,22 @@
   border-left: 4px solid #10b981;
 }
 
+.exemplosTexto {
+  margin: 0.75rem 0 0 0;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #4b5563;
+  font-style: italic;
+  border-left: 2px solid #d1d5db;
+  
+  strong {
+    font-weight: 600;
+    color: #1f2937;
+  }
+}
+
 .acoes {
   display: flex;
   gap: 1rem;

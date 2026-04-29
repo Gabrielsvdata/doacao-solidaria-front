@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { obterExemplosCategoria } from '../utils/categoriasExemplos';
 import styles from './DetalhesInstituicao.module.scss';
 
 export default function DetalhesInstituicao() {
@@ -191,26 +192,61 @@ export default function DetalhesInstituicao() {
             {/* Recomendação de Doação */}
             <div className={styles.recomendacaoBox}>
               <h3>💡 Recomendação de Doação</h3>
-              {statusInfo.severidade === 'crítica' && (
-                <p className={styles.textoCritico}>
-                  Esta instituição está em situação crítica e precisa urgentemente de doações de <strong>{instituicao.categoria}</strong>.
-                </p>
-              )}
-              {statusInfo.severidade === 'alta' && (
-                <p className={styles.textoAlta}>
-                  Esta instituição tem nível baixo de <strong>{instituicao.categoria}</strong>. Suas doações serão muito bem-vindas.
-                </p>
-              )}
-              {statusInfo.severidade === 'normal' && (
-                <p className={styles.textoNormal}>
-                  Esta instituição está em situação estável de <strong>{instituicao.categoria}</strong>. Qualquer doação é bem-vinda!
-                </p>
-              )}
-              {statusInfo.severidade === 'info' && (
-                <p className={styles.textoInfo}>
-                  Esta instituição tem estoque suficiente de <strong>{instituicao.categoria}</strong> no momento. Considere outras instituições.
-                </p>
-              )}
+              {(() => {
+                const exemplos = obterExemplosCategoria(instituicao.categoria);
+                return (
+                  <>
+                    {statusInfo.severidade === 'crítica' && (
+                      <div>
+                        <p className={styles.textoCritico}>
+                          Esta instituição está em situação crítica e precisa urgentemente de doações de <strong>{exemplos.nome}</strong>.
+                        </p>
+                        {exemplos.exemplos.length > 0 && (
+                          <p className={styles.exemplosTexto}>
+                            Exemplos: {exemplos.exemplos.slice(0, 5).join(', ')}{exemplos.exemplos.length > 5 ? ' e mais.' : '.'}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                    {statusInfo.severidade === 'alta' && (
+                      <div>
+                        <p className={styles.textoAlta}>
+                          Esta instituição tem nível baixo de <strong>{exemplos.nome}</strong>. Suas doações serão muito bem-vindas.
+                        </p>
+                        {exemplos.exemplos.length > 0 && (
+                          <p className={styles.exemplosTexto}>
+                            Exemplos: {exemplos.exemplos.slice(0, 5).join(', ')}{exemplos.exemplos.length > 5 ? ' e mais.' : '.'}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                    {statusInfo.severidade === 'normal' && (
+                      <div>
+                        <p className={styles.textoNormal}>
+                          Esta instituição está em situação estável de <strong>{exemplos.nome}</strong>. Qualquer doação é bem-vinda!
+                        </p>
+                        {exemplos.exemplos.length > 0 && (
+                          <p className={styles.exemplosTexto}>
+                            Exemplos: {exemplos.exemplos.slice(0, 5).join(', ')}{exemplos.exemplos.length > 5 ? ' e mais.' : '.'}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                    {statusInfo.severidade === 'info' && (
+                      <div>
+                        <p className={styles.textoInfo}>
+                          Esta instituição tem estoque suficiente de <strong>{exemplos.nome}</strong> no momento. Considere outras instituições.
+                        </p>
+                        {exemplos.exemplos.length > 0 && (
+                          <p className={styles.exemplosTexto}>
+                            Exemplos: {exemplos.exemplos.slice(0, 5).join(', ')}{exemplos.exemplos.length > 5 ? ' e mais.' : '.'}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
 
               <div className={styles.acoes}>
                 <button className={styles.botaoPrincipal} onClick={() => navigate(`/doacao/${id}`)}>
