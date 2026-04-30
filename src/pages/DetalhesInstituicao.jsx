@@ -112,11 +112,19 @@ export default function DetalhesInstituicao() {
 
             <div className={styles.infoBox}>
               <h3>Localização</h3>
-              <p className={styles.endereco}>
-                {instituicao.endereco}
-                {instituicao.numero && ` ${instituicao.numero}`}
-                {instituicao.complemento && ` - ${instituicao.complemento}`}
-              </p>
+              {(() => {
+                const enderecroCompleto = `${instituicao.endereco}${instituicao.numero ? ` ${instituicao.numero}` : ''}${instituicao.complemento ? ` ${instituicao.complemento}` : ''}, ${instituicao.bairro ? instituicao.bairro + ', ' : ''}${instituicao.cidade}${instituicao.estado ? ` - ${instituicao.estado}` : ''}${instituicao.cep ? ` ${instituicao.cep}` : ''}`;
+                const googleMapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(enderecroCompleto)}`;
+                return (
+                  <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <p className={styles.endereco} style={{ cursor: 'pointer', transition: 'color 0.3s' }} onMouseEnter={(e) => e.target.style.color = '#667eea'} onMouseLeave={(e) => e.target.style.color = 'inherit'}>
+                      {instituicao.endereco}
+                      {instituicao.numero && ` ${instituicao.numero}`}
+                      {instituicao.complemento && ` - ${instituicao.complemento}`}
+                    </p>
+                  </a>
+                );
+              })()}
               <p className={styles.bairro}>
                 {instituicao.bairro && `${instituicao.bairro}, `}
                 {instituicao.cidade}
@@ -267,7 +275,6 @@ export default function DetalhesInstituicao() {
             <div className={styles.statCard}>
               <span className={styles.statLabel}>Status Atual</span>
               <span className={styles.statValor}>{statusInfo.label}</span>
-              <span className={styles.statDescricao}>{statusInfo.severidade}</span>
             </div>
             <div className={styles.statCard}>
               <span className={styles.statLabel}>Espaço Disponível</span>

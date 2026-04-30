@@ -21,7 +21,7 @@ export default function Home() {
         <section className={styles.hero}>
           <div className={styles.heroConteudo}>
             <h2 className={styles.heroTitulo}>Doação Solidária</h2>
-            <p className={styles.heroSubtitulo}>Sistema de doações para situações de emergência em São Vicente</p>
+            <p className={styles.heroSubtitulo}>Sistema de doações para situações de emergência em São Vicente.</p>
             
             <div className={styles.descricao}>
               <p>Conectamos doadores com instituições que mais precisam de ajuda. Conhecemos diariamente as instituições que cuidam de famílias vítimas das enchentes.</p>
